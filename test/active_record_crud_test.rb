@@ -18,57 +18,36 @@ class  ActiveRecordCrudTest < Test::Unit::TestCase
     should "have one record in the database" do
       assert_equal 1, Umbrella.count
     end
-  end
 
-  context "Reading records" do
-    setup do
-      @u = Umbrella.new
-      @u.colour = 'red'
-      @u.handle_material = 'wood'
-      @u.price = 59.99
-      @u.save!
-    end
+    context "Reading records" do
 
-    should "allow us to find a record" do
-      assert_equal @u, Umbrella.find_by_colour("red")
-      assert_equal [@u], Umbrella.where(:handle_material => 'wood')
-      assert_equal [@u], Umbrella.where(:price => 59.99)
+      should "allow us to find a record" do
+        assert_equal @u, Umbrella.find_by_colour("red")
+        assert_equal [@u], Umbrella.where(:handle_material => 'wood')
+        assert_equal [@u], Umbrella.where(:price => 59.99)
+
+      end
 
     end
 
-  end
-  
-  context "Update records" do
-    setup do
-      @u = Umbrella.new
-      @u.colour = 'red'
-      @u.handle_material = 'wood'
-      @u.price = 59.99
-      @u.save!
+    context "Update records" do
+
+      should "allow us to update a record" do
+        @u.update_attributes({ :colour => "Green"})
+        @u.reload
+        assert_equal 'Green', @u.colour
+      end
+
     end
 
-    should "allow us to update a record" do
-      @u.update_attributes({ :colour => "Green"})
-      @u.reload
-      assert_equal 'Green', @u.colour
+    context "Delete records" do
+
+      should "delete the record with destroy" do
+        @u.destroy
+        assert_equal 0, Umbrella.count
+      end
+
     end
-
-  end
-
-  context "Delete records" do
-    setup do
-      @u = Umbrella.new
-      @u.colour = 'red'
-      @u.handle_material = 'wood'
-      @u.price = 59.99
-      @u.save!
-    end
-
-    should "delete the record with destroy" do
-      @u.destroy
-      assert_equal 0, Umbrella.count
-    end
-
   end
 
 end
