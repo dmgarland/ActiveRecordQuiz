@@ -45,12 +45,12 @@ class AboutActiveRecord < Test::Unit::TestCase
 
     context "in total" do
       should "have the right number of models" do
-        assert_equal ___, Library.count
-        assert_equal ___, Book.count
-        assert_equal ___, Page.count
-        assert_equal ___, Cover.count
-        assert_equal ___, AuthorBook.count
-        assert_equal ___, Author.count
+        assert_equal 1, Library.count
+        assert_equal 3, Book.count
+        assert_equal 20, Page.count
+        assert_equal 3, Cover.count
+        assert_equal 3, AuthorBook.count
+        assert_equal 3, Author.count
       end
     end
 
