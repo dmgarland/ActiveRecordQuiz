@@ -97,14 +97,14 @@ class AboutActiveRecord < Test::Unit::TestCase
 
     context "War and Peace" do
       should "have one cover" do
-        assert_equal ___, @war_peace.respond_to?(:covers)
-        assert_equal ___, @war_peace.respond_to?(:cover)
-        assert_equal ___, @war_peace.cover.class
-        assert_equal ___, @war_peace.cover.book
-        assert_equal ___, @war_peace.respond_to?(:book_id)
-        assert_equal ___, @war_peace.respond_to?(:cover_id)
-        assert_equal ___, @war_peace.cover.respond_to?(:book_id)
-        assert_equal ___, @war_peace.cover.respond_to?(:cover_id)
+        assert_equal false, @war_peace.respond_to?(:covers)
+        assert_equal true, @war_peace.respond_to?(:cover)
+        assert_equal Cover, @war_peace.cover.class
+        assert_equal @war_peace, @war_peace.cover.book
+        assert_equal false, @war_peace.respond_to?(:book_id)
+        assert_equal false, @war_peace.respond_to?(:cover_id)
+        assert_equal true, @war_peace.cover.respond_to?(:book_id)
+        assert_equal false, @war_peace.cover.respond_to?(:cover_id)
       end
 
       should "have many pages" do
