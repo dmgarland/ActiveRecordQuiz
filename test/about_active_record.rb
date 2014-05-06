@@ -81,9 +81,9 @@ class AboutActiveRecord < Test::Unit::TestCase
 
     context "Leo Tolstoy" do
       should "have written many pages" do
-        assert_equal ___, @leo.respond_to?(:pages)
-        assert_equal ___, @leo.pages.length
-        assert_equal ___, @leo.pages.first.class
+        assert_equal true, @leo.respond_to?(:pages)
+        assert_equal 10, @leo.pages.length
+        assert_equal Page, @leo.pages.first.class
       end
 
       should "be searchable by name" do
