@@ -68,15 +68,14 @@ class AboutActiveRecord < Test::Unit::TestCase
         results = @library.books.where(:genre => "Historical fiction")
         assert_equal 2, results.length
         assert_equal Book, results.first.class
-        assert_equal @library, results
+        assert_equal [@war_peace, @life_fate] , results
       end     
 
       should "know how many books have at least 7 pages" do
         results = @library.books.includes(:pages).where('pages.number >= 7')
-        binding.pry
-        assert_equal ___, results.length
-        assert_equal ___, results.first.class
-        assert_equal ___, results
+        assert_equal 2, results.length
+        assert_equal Book, results.first.class
+        assert_equal [@war_peace, @doctor_zhivago] , results
       end
     end
 
