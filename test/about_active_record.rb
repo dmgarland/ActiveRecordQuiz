@@ -87,11 +87,11 @@ class AboutActiveRecord < Test::Unit::TestCase
       end
 
       should "be searchable by name" do
-        assert_equal ___, Author.find_by_name("Leo Tolstoy").class
-        assert_equal ___, Author.find_by_name("Leo Tolstoy")
-        assert_equal ___, Author.where(:name => "Leo Tolstoy").class
-        assert_equal ___, Author.where(:name => "Leo Tolstoy").first
-        assert_equal ___, Author.first
+        assert_equal Author, Author.find_by_name("Leo Tolstoy").class
+        assert_equal @leo, Author.find_by_name("Leo Tolstoy")
+        assert_equal ActiveRecord::Relation, Author.where(:name => "Leo Tolstoy").class
+        assert_equal @leo, Author.where(:name => "Leo Tolstoy").first
+        assert_equal @leo, Author.first
       end
     end
 
