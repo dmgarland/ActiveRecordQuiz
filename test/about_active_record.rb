@@ -56,23 +56,24 @@ class AboutActiveRecord < Test::Unit::TestCase
 
     context "the library" do
       should "have many books" do
-        assert_equal ___, @library.respond_to?(:books)
-        assert_equal ___, @library.books.length
-        assert_equal ___, @library.books.first.class
-        assert_equal ___, @library.respond_to?(:book_id)
-        assert_equal ___, @library.respond_to?(:library_id)
-        assert_equal ___, @library.books.first.library
+        assert_equal true, @library.respond_to?(:books)
+        assert_equal 3, @library.books.length
+        assert_equal Book, @library.books.first.class
+        assert_equal false, @library.respond_to?(:book_id)
+        assert_equal false, @library.respond_to?(:library_id)
+        assert_equal @library, @library.books.first.library
       end
 
       should "know how many books are Historical fiction" do
         results = @library.books.where(:genre => "Historical fiction")
-        assert_equal ___, results.length
-        assert_equal ___, results.first.class
-        assert_equal ___, results
+        assert_equal 2, results.length
+        assert_equal Book, results.first.class
+        assert_equal @library, results
       end     
 
       should "know how many books have at least 7 pages" do
         results = @library.books.includes(:pages).where('pages.number >= 7')
+        binding.pry
         assert_equal ___, results.length
         assert_equal ___, results.first.class
         assert_equal ___, results
