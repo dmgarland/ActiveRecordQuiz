@@ -108,14 +108,14 @@ class AboutActiveRecord < Test::Unit::TestCase
       end
 
       should "have many pages" do
-        assert_equal ___, @war_peace.respond_to?(:pages)
-        assert_equal ___, @war_peace.pages.length
-        assert_equal ___, @war_peace.pages.first.class
-        assert_equal ___, @war_peace.pages.first.number
-        assert_equal ___, @war_peace.pages.first.book
-        assert_equal ___, @war_peace.respond_to?(:page_id)
-        assert_equal ___, @war_peace.pages.first.respond_to?(:book_id)
-        assert_equal ___, @war_peace.pages.first.respond_to?(:page_id)
+        assert_equal true, @war_peace.respond_to?(:pages)
+        assert_equal 10, @war_peace.pages.length
+        assert_equal Page, @war_peace.pages.first.class
+        assert_equal 1, @war_peace.pages.first.number
+        assert_equal @war_peace, @war_peace.pages.first.book
+        assert_equal false, @war_peace.respond_to?(:page_id)
+        assert_equal true, @war_peace.pages.first.respond_to?(:book_id)
+        assert_equal false, @war_peace.pages.first.respond_to?(:page_id)
       end
 
       should "have many authors" do
