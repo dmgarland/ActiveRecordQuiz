@@ -119,18 +119,18 @@ class AboutActiveRecord < Test::Unit::TestCase
       end
 
       should "have many authors" do
-        assert_equal ___, @war_peace.respond_to?(:authors)
-        assert_equal ___, @war_peace.respond_to?(:author_books)
-        assert_equal ___, @war_peace.authors.class
-        assert_equal ___, @war_peace.authors.length
-        assert_equal ___, @war_peace.authors.first.name
-        assert_equal ___, @war_peace.respond_to?(:author_id)
-        assert_equal ___, @war_peace.respond_to?(:author_book_id)
-        assert_equal ___, @war_peace.authors.first.respond_to?(:book_id)
-        assert_equal ___, @war_peace.author_books.first.respond_to?(:book_id)
-        assert_equal ___, @war_peace.author_books.first.respond_to?(:author_id)
-        assert_equal ___, @war_peace.author_books.to_sql.chomp.gsub("\"", "'").squeeze(" ")
-        assert_equal ___, @war_peace.authors.to_sql.chomp.gsub("\"", "'").squeeze(" ")
+        assert_equal true, @war_peace.respond_to?(:authors)
+        assert_equal true, @war_peace.respond_to?(:author_books)
+        assert_equal Array, @war_peace.authors.class
+        assert_equal 1, @war_peace.authors.length
+        assert_equal "Leo Tolstoy", @war_peace.authors.first.name
+        assert_equal false, @war_peace.respond_to?(:author_id)
+        assert_equal false, @war_peace.respond_to?(:author_book_id)
+        assert_equal false, @war_peace.authors.first.respond_to?(:book_id)
+        assert_equal true, @war_peace.author_books.first.respond_to?(:book_id)
+        assert_equal true, @war_peace.author_books.first.respond_to?(:author_id)
+        assert_equal "SELECT 'author_books'.* FROM 'author_books' WHERE 'author_books'.'book_id' = 1", @war_peace.author_books.to_sql.chomp.gsub("\"", "'").squeeze(" ")
+        assert_equal "SELECT 'authors'.* FROM 'authors' INNER JOIN 'author_books' ON 'authors'.'id' = 'author_books'.'author_id' WHERE 'author_books'.'book_id' = 1", @war_peace.authors.to_sql.chomp.gsub("\"", "'").squeeze(" ")
       end
 
       should "be searchable by name" do
